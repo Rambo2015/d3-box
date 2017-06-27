@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>D3</title>
+	<script type="text/javascript" src="./d3.v4.js" ></script>
+	<link rel="stylesheet" type="text/css" href="./animate.css" />
+		<style type="text/css">
+		
+			div.bar {
+				display: inline-block;
+				position: absolute;
+			}
+			.c5  { background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);}
+			.c15 { background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%); }
+			.c25 { background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); }
+			.c35 { background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%); }
+			.c45 { background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%); }
+
+			div.o {
+				-webkit-animation: rotation 3s infinite linear;
+			}
+			div.e {
+				-webkit-animation: rev-rotation 2s infinite linear;
+			}
+			@-webkit-keyframes rotation {
+				from {
+						-webkit-transform: rotate(0deg);
+				}
+				to {
+						-webkit-transform: rotate(360deg);
+				}
+			}
+
+			@-webkit-keyframes rev-rotation {
+				from {
+						-webkit-transform: rotate(360deg);
+				}
+				to {
+						-webkit-transform: rotate(0deg);
+				}
+			}
+		
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<script type="text/javascript">
+		
+			var dataset = [
+				{x:5,  y:5,  z: 45, c: 'e'},
+				{x:15, y:15, z: 35, c: 'o'},
+				{x:25, y:25, z: 25, c: 'e'},
+				{x:35, y:35, z: 15, c: 'o'},
+				{x:45, y:45, z: 5, c: 'e'},
+			];
+			var centerX = 50;
+			var centerY = 50;
+			var centerZ = 50;
+			
+			d3.select("body").selectAll("div")
+				.data(dataset)
+				.enter()
+				.append("div")
+				.attr("style", function(d){
+					var left = centerX - d.x, top = centerY - d.y,
+						height = 2 * d.y, width= 2 * d.x;
+					return 'border-radius:' + d.x + 'px;height:'+  height +'px; width:'+ width +'px;' + 'top:'+ top +'px; left:'+ left +'px;z-index:'+ d.z;
+				}).attr('class', function(d){
+					return 'bar c'+ d.x + ' ' + d.c;
+				});
+			
+		</script>
+	</body>
+</html>
